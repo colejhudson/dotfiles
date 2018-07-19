@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+
+export PS1="𝝺 "
+export EDITOR="nvim"
+export TERM=xterm-256color
+export COMPUTER_NAME="laptop"
+
+export GOPATH=$GOPATH:$(brew --prefix)/lib/go
+export NODEPATH=$NODE_PATH:$(brew --prefix)/lib/node_modules
+export NODEPATH=$NODE_PATH:$HOME/.config/yarn/global
+export NODEPATH=$NODE_PATH:$HOME/.npm
+export QUICKLISPPATH=$HOME/.config/quicklisp
+
+export PYENV_ROOT=${HOME}/.pyenv
+
+export PATH=$HOME/.yarn/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=/usr/local/cuda/bin:$PATH
+export PATH=/usr/local/opt/go/libexec/bin:$PATH
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+export PATH=/usr/local/opt/node/bin:$PATH
+export PATH=/usr/local/opt/ruby/bin:$PATH
+export PATH=/Library/Frameworks/Python.framework/Versions/3.5/bin:$PATH
+export PATH=$(pyenv root)/shims:$PATH
+
+alias emacs-server-start='emacs -nw --daemon --eval "(server-start)"'
+alias emacs-server-stop='e --eval "(kill-emacs)"'
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias vim='nvim'
+
+alias sbcl-quicklisp='sbcl --load ${QUICKLISPPATH}/setup.lisp'
+alias sbcl-quicklisp-eval-and-quit='sbcl-quicklisp --quit --eval'
+alias common-lisp='sbcl-quicklisp'
+
+# alias mktempfifo='TMP=$(mktemp -u) && { mkfifo -m 600 ${TMP}; echo ${TMP}; }'
+alias f='fzf'
+alias copy='pbcopy'
+alias please='sudo'
+
+function network-local-address() {
+    ipconfig getifaddr en0
+}
+
+function ddjvu-djvu-to-pdf() {
+    [[ ${#@} -ne 2 ]] && echo "usage: ${FUNC_NAME[0]} </path/to/input.djvu> </path/to/output.pdf>"  && return 0
+    ddjvu -format=pdf -quality=85 -verbose ${1} ${2}
+}
+
+function pad-number-with-zeros() {
+    [[ ${#@} -ne 1 ]] && echo "usage: ${FUNC_NAME[0]} <integer>" && return 0
+    printf "%04d\n" ${1}
+}
+
+[[ ! (-e ${USERCONFIGLOCKPATH}) ]] && {
+    chflags nohidden ~/Library
+    launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+    defaults write com.apple.LaunchServices LSHandlers
+
+    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+    defaults write com.apple.Safari UniversalSearchEnabled -bool false
+    defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+    defaults write com.apple.finder ShowPathbar -bool true
+    defaults write com.apple.finder AppleShowAllFiles -bool true
+    defaults write com.apple.finder EmptyTrashSecurely -bool true
+    defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+    defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+    defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+    defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+    defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+    defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+    defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+    defaults write com.apple.dashboard mcx-disabled -bool true
+    defaults write com.apple.terminal StringEncodings -array 4
+    defaults write com.apple.dock mouse-over-hilite-stack -bool true
+    defaults write com.apple.LaunchServices LSQuarantine -bool false
+    defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+    # It might be prudent here to make this a symbollic link to the yes binary such that 
+    # I can directly execute it, or have it be an interpretable bash script with the 'true' keyword
+    # its sole contents
+    touch ${USERCONFIGLOCKPATH}
+    echo "Do not remove this file unless you wish for your account to be configured again." > ${USERCONFIGLOCKPATH}
+}
+
+[[ ! (-e ${SYSCONFIGLOCKPATH}) ]] && {
+    sudo scutil --set HostName "${COMPUTER_NAME}"
+    sudo scutil --set ComputerName "${COMPUTER_NAME}"
+    sudo scutil --set LocalHostName "${COMPUTER_NAME}"
+    sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${COMPUTER_NAME}"
+
+    sudo nvram SystemAudioVolume=""
+    sudo systemsetup -setrestartfreeze on
+    sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+    # It might be prudent here to make this a symbollic link to the yes binary such that 
+    # I can directly execute it, or have it be an interpretable bash script with the 'true' keyword
+    # its sole contents
+    touch ${SYSCONFIGLOCKPATH}
+    echo "Do not remove this file unless you wish for your account to be configured again." > ${SYSCONFIGLOCKPATH}
+}
