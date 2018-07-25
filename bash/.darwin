@@ -26,35 +26,8 @@ export PATH=/usr/local/opt/ruby/bin:$PATH
 export PATH=/Library/Frameworks/Python.framework/Versions/3.5/bin:$PATH
 export PATH=$(pyenv root)/shims:$PATH
 
-alias emacs-server-start='emacs -nw --daemon --eval "(server-start)"'
-alias emacs-server-stop='e --eval "(kill-emacs)"'
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias vim='nvim'
-
-alias sbcl-quicklisp='sbcl --load ${QUICKLISPPATH}/setup.lisp'
-alias sbcl-quicklisp-eval-and-quit='sbcl-quicklisp --quit --eval'
-alias common-lisp='sbcl-quicklisp'
-
-# alias mktempfifo='TMP=$(mktemp -u) && { mkfifo -m 600 ${TMP}; echo ${TMP}; }'
-alias f='fzf'
-alias copy='pbcopy'
-alias please='sudo'
-
-function network-local-address() {
-    ipconfig getifaddr en0
-}
-
-function ddjvu-djvu-to-pdf() {
-    [[ ${#@} -ne 2 ]] && echo "usage: ${FUNC_NAME[0]} </path/to/input.djvu> </path/to/output.pdf>"  && return 0
-    ddjvu -format=pdf -quality=85 -verbose ${1} ${2}
-}
-
-function pad-number-with-zeros() {
-    [[ ${#@} -ne 1 ]] && echo "usage: ${FUNC_NAME[0]} <integer>" && return 0
-    printf "%04d\n" ${1}
-}
-
 [[ ! (-e ${USERCONFIGLOCKPATH}) ]] && {
+    echo "Configuring account defaults."
     chflags nohidden ~/Library
     launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
@@ -95,6 +68,7 @@ function pad-number-with-zeros() {
 }
 
 [[ ! (-e ${SYSCONFIGLOCKPATH}) ]] && {
+    echo "Configuring system defaults."
     sudo scutil --set HostName "${COMPUTER_NAME}"
     sudo scutil --set ComputerName "${COMPUTER_NAME}"
     sudo scutil --set LocalHostName "${COMPUTER_NAME}"
@@ -108,5 +82,11 @@ function pad-number-with-zeros() {
     # I can directly execute it, or have it be an interpretable bash script with the 'true' keyword
     # its sole contents
     touch ${SYSCONFIGLOCKPATH}
-    echo "Do not remove this file unless you wish for your account to be configured again." > ${SYSCONFIGLOCKPATH}
+    echo "Do not remove this file unless you wish for your system to be configured again." > ${SYSCONFIGLOCKPATH}
+}
+
+[[ -e ${HOME}/.ssh/id_rsa.pub ]] && {
+    echo "Configuring automatic ssh authentication."
+    eval $(ssh-agent -s)
+    ssh-add
 }

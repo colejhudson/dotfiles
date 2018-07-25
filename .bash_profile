@@ -15,11 +15,14 @@ export USERCONFIGLOCKPATH=${HOME}/.userconfig-lock
 export USER_ROOT=${HOME}/.$(whoami) # account specific root
 export USER_SRC=${USER_ROOT}/src # account specific source directory
 export USER_ETC=${USER_ROOT}/etc # account specific configuration files
-export USER_DOT=${USER_ROOT}/dotfiles
+export USER_DOT=${USER_ROOT}/dotfiles # account specific dotfiles
 
 export CONFIG=$(basename ${SHELL})/.$(uname | tr [[:upper:]] [[:lower:]])
 
 source ${USER_DOT}/${CONFIG}
+
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
 
 alias c="clear"
 
@@ -39,9 +42,8 @@ alias eb="e ${HOME}/.bash_profile"
 alias ..="cd .."
 alias ...="cd ../.."
 
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
-
 export GPG_TTY=$(tty)
 
-[[ -e ${HOME}/.opam ]] && { source ${HOME}/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true }
+[[ -e ${HOME}/.opam ]] && { source ${HOME}/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true; }
+
+clear

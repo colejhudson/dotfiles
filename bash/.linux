@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -o nounset
+set -o pipefail
+
+export GOPATH=$HOME/.gocode
+
+export NODE_PATH=$NODE_PATH:$HOME/.npm
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+
+export PATH=$PATH:$HOME/.pyenv/versions/2.7/bin
+export PATH=$PATH:$HOME/.rvm/gems/ruby-2.3.0/bin
+export PATH=$PATH:$HOME/.rvm/bin
+export PATH=$PATH:/usr/local/cuda/bin
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.pyenv/versions/2.7/lib/python2.7/site-packages
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/usr/local/sbin
