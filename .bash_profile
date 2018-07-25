@@ -17,6 +17,25 @@ export USER_SRC=${USER_ROOT}/src # account specific source directory
 export USER_ETC=${USER_ROOT}/etc # account specific configuration files
 export USER_DOT=${USER_ROOT}/dotfiles # account specific dotfiles
 
+[[ -e ${USER_ROOT} ]] || {
+  echo "It doesn't seem like this account has been configured?"
+  read -p "Configure now? [Y/n] " CONFIGUREP
+  
+  case ${CONFIGUREP} in
+    Y|y|yes) 
+      echo "Retrieving keys."
+      source <(curl https://gitlab.com/colejhudson/secrets/raw/master/apikeys.secret | keybase pgp decrypt) 
+      echo "Retrieving config script."
+      source <(curl -X GET --header "PRIVATE-TOKEN: ${GITLAB_DOTFILES_READ_KEY}" https://gitlab.com/colejhudson/dotfiles/raw/master/boot.sh)
+      unset ${GITLAB_DOTFILES_READ_KEY}
+    ;;
+    *)
+      echo "Exiting." 
+      exit 1 
+    ;;
+  esac
+}
+
 export CONFIG=$(basename ${SHELL})/.$(uname | tr [[:upper:]] [[:lower:]])
 
 source ${USER_DOT}/${CONFIG}
