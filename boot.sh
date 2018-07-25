@@ -11,7 +11,8 @@ export USER_DOT=${USER_ROOT}/dotfiles
 
 [[ -e ${SYSCONFIGPATH} ]] || {
   mkdir ${SYSCONFIGPATH}
-  curl https://gitlab.com/colejhudson/dotfiles/raw/master/.bash_profile > ${SYSCONFIGPATH}/.bash_profile
+  # Because the repo is private a key is needed 
+  curl -X GET --header "PRIVATE-TOKEN: ${GITLAB_DOTFILES_READ_KEY}" https://gitlab.com/colejhudson/dotfiles/raw/master/.bash_profile > ${SYSCONFIGPATH}/.bash_profile
 }
 
 [[ -e ${USER_ROOT} ]] || {
@@ -29,7 +30,7 @@ export USER_DOT=${USER_ROOT}/dotfiles
     read -p "Which config would you like to install? (e.g. bash, fish, csh):" SHELL
     case ${SHELL} in
       bash|Bash)
-        curl "https://gitlab.com/colejhudson/dotfiles/blob/master/$(basename ${SCRIPT})/.$(uname | tr [[:upper:]] [[:lower:]])" 
+        curl -X GET --header "PRIVATE-TOKEN: ${GITLAB_DOTFILES_READ_KEY}" "https://gitlab.com/colejhudson/dotfiles/blob/master/$(basename ${SCRIPT})/.$(uname | tr [[:upper:]] [[:lower:]])" 
       ;;
       *)
         echo "A configuration file for that shell isn't available. Exiting."
