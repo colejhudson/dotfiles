@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+
+function update-gf -a MESSAGE
+  set URL https://whatthefuckisyourboyfrienddoing.now.sh/
+  curl --request POST --data $MESSAGE $URL
+end

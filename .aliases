@@ -1,0 +1,30 @@
+#!/usr/bin/env fish
+
+alias c='clear'
+
+alias l='ls -a'
+alias ll='ls -la'
+
+alias v='nvim'
+alias e='emacsclient -nw'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ghci='stack --resolver lts-12.0 --system-ghc ghci'
+alias ghc='stack --resolver lts-12.0 --system-ghc ghc'
+
+alias emacs-server-start='emacs -nw --daemon --eval "(server-start)"'
+alias emacs-server-stop='e --eval "(kill-emacs)"'
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias vim='nvim'
+
+alias sbcl-quicklisp='sbcl --load $QUICKLISPPATH/setup.lisp'
+alias sbcl-quicklisp-eval-and-quit='sbcl-quicklisp --quit --eval'
+alias common-lisp='sbcl-quicklisp'
+
+alias f='fzf'
+alias copy='pbcopy'
+alias please='sudo'
+
+alias portof='lsof -i :'
+alias cole@colejhudson.com='curl curlmail.co/cole@colejhudson.com'
