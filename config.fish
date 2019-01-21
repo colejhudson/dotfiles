@@ -10,3 +10,8 @@ source $DOT/.functions
 source $DOT/.aliases
 source $DOT/.config
 source $DOT/.env
+
+if test $CONFIGURED; and status --is-interactive
+	source $DOT/.(uname -s)
+	set -U CONFIGURED true
+end
