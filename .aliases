@@ -27,4 +27,4 @@ alias copy='pbcopy'
 alias please='sudo'
 
 alias portof='lsof -i :'
-alias cole@colejhudson.com='curl -d @- curlmail.co/cole@colejhudson.com'
+alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.com'
