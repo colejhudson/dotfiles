@@ -23,8 +23,6 @@ set NODEPATH $NODE_PATH $HOME/.npm
 
 set QUICKLISPPATH $HOME/.config/quicklisp
 
-set PYENV_ROOT $HOME/.pyenv
-
 set PATH $HOME/.yarn/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.local/bin $PATH
@@ -35,4 +33,3 @@ set PATH /usr/local/opt/go/libexec/bin $PATH
 set PATH /usr/local/opt/python/libexec/bin $PATH
 set PATH /usr/local/opt/node/bin $PATH
 set PATH /usr/local/opt/ruby/bin $PATH
-set PATH (pyenv root)/shims $PATH
