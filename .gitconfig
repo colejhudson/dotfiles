@@ -1,29 +1,30 @@
 [user]
-	email = cole@colejhudson.com
-	name = Cole Hudson
+  email = cole@colejhudson.com
+  name = Cole Hudson
   username = colejhudson
+  signingkey = "49667D13599D4AF837EA646E2F7DB0FBBB9FEFC7" 
 [core]
   editor = vim
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 [web]
-	browser = firefox
+  browser = firefox
 [credential]
-	helper = cache --timeout 7200
+  helper = cache --timeout 7200
 [transfer]
-	fsckObjects = false
+  fsckObjects = false
 [fetch]
-	fsckobjects = false
+  fsckobjects = false
 [receive "fsck"]
-	zeroPaddedFilemode = warn
+  zeroPaddedFilemode = warn
 [github]
-	user = colejhudson
+  user = colejhudson
 [alias]
   c = commit
-	commit = commit -S
+  commit = commit -S
   b = branch
   ap = add --patch
   ra = remote add
   rr = remote rename
 [commit]
-	gpgsign = true
+  gpgsign = true
