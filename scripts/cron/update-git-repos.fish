@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+
 set -l ROOT $HOME/.work/src/contributions
 
 for dir in $ROOT/*
@@ -9,8 +11,7 @@ for dir in $ROOT/*
 	 * Gitlab: https://gitlab.com/colejhudson/$REPO\n
 	 * Github: https://github.com/colejhudson/$REPO"
 
-	git pull public master 
-	git push private master 
-	
-	echo -e $MSG | cole@colejhudson.com
+	git pull public master; and \
+  git push private master; and \
+  echo -e $MSG | cole@colejhudson.com
 end
