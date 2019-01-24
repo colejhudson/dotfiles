@@ -31,3 +31,5 @@ alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.c
 
 alias git_inital_commit='git commit -m "🎉 initial commit! 🎉"'
 alias git_push_all='git remote | xargs -L1 git push'
+
+alias datascience_notebook='docker run -d --rm -p 8080:8888 -e $HOME=$PWD -e JUPYTER_ENABLE_LAB=yes -w $PWD -v $PWD:$PWD jupyter/datascience-notebook'
