@@ -78,3 +78,12 @@ if not test -f /Applications/Xcode.app
   xcode-select --install
   sudo ln -s /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include /usr/include 
 end
+
+if not test -f $HOME/.ctags
+  ln -s (pwd)/.ctags $HOME/.ctags
+end
+
+if not test -f $HOME/.gitconfig
+  ln -s (pwd)/.gitconfig $HOME/.gitconfig
+end
+
