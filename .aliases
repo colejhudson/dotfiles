@@ -5,31 +5,34 @@ alias c='clear'
 alias l='ls -a'
 alias ll='ls -la'
 
-alias v='nvim'
-alias e='emacsclient -nw'
-
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ghci='stack --resolver lts-12.0 --system-ghc ghci'
-alias ghc='stack --resolver lts-12.0 --system-ghc ghc'
 
-alias emacs-server-start='emacs -nw --daemon --eval "(server-start)"'
-alias emacs-server-stop='e --eval "(kill-emacs)"'
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias ghc='stack --resolver lts-12.0 --system-ghc ghc'
+alias ghci='stack --resolver lts-12.0 --system-ghc ghci'
+
+alias v='nvim'
 alias vim='nvim'
 
-alias sbcl-quicklisp='sbcl --load $QUICKLISPPATH/setup.lisp'
-alias sbcl-quicklisp-eval-and-quit='sbcl-quicklisp --quit --eval'
-alias common-lisp='sbcl-quicklisp'
+alias e='emacsclient -nw'
+alias emacs_server_stop='e --eval "(kill-emacs)"'
+alias emacs_server_start='emacs -nw --daemon --eval "(server-start)"'
+
+alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+
+alias quicklisp='sbcl --load $QUICKLISPPATH/setup.lisp'
+alias quicklisp_run='quicklisp --quit --eval'
+alias commonlisp='quicklisp'
 
 alias f='fzf'
-alias copy='pbcopy'
+
 alias please='sudo'
 
 alias portof='lsof -i :'
+
 alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.com'
 
-alias git_inital_commit='git commit -m "🎉 initial commit! 🎉"'
 alias git_push_all='git remote | xargs -L1 git push'
+alias git_inital_commit='git commit -m "🎉 initial commit! 🎉"'
 
-alias datascience_notebook='docker run -d --rm -p 8080:8888 -e $HOME=$PWD -e JUPYTER_ENABLE_LAB=yes -w $PWD -v $PWD:$PWD jupyter/datascience-notebook'
+alias datascience_notebook='docker run -d -p 8080:8888 -e $HOME=$PWD -e JUPYTER_ENABLE_LAB=yes -w $PWD -v $PWD:$PWD jupyter/datascience-notebook'
