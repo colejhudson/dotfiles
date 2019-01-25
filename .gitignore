@@ -1,0 +1,12 @@
+# git
+.git
+.gitsecret/keys/random_seed
+
+# macos
+.DS_Store
+
+# node
+node_modules
+
+# c
+build
