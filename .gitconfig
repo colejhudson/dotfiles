@@ -27,6 +27,7 @@
   ra = remote add
   rr = remote rename
   hub = !hub
+  lab = !lab
   push-all = !git remote | xargs -L1 git push
   inital-commit = commit -m "🎉initial commit!🎉"
 [commit]
