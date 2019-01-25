@@ -25,8 +25,9 @@
   b = branch
   ap = add --patch
   ra = remote add
+  rr = remote rename
+  hub = !hub
   push-all = !git remote | xargs -L1 git push
   inital-commit = commit -m "🎉initial commit!🎉"
-  rr = remote rename
 [commit]
   gpgsign = true
