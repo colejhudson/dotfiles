@@ -1,5 +1,11 @@
 #!/usr/bin/env fish
 
+function link_to_home -a file
+  if test -f (pwd)/$file; and not test -f $HOME/$file
+    ln -s (pwd)/$file $HOME/$file
+  end
+end
+
 if not test $USER_IS_CONFIGURED
   set -U MACOS_VERSION (sw_vers -productVersion)
  
@@ -36,25 +42,11 @@ if not test $USER_IS_CONFIGURED
   defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-  if not test -f $HOME/.vimrc
-    ln -s (pwd)/.vimrc $HOME/.vimrc
-  end
-
-  if not test -f $HOME/.tmux.conf
-    ln  -s (pwd)/.tmux.conf $HOME/.tmux.conf
-  end
-
-  if not test -f $HOME/.ctags
-    ln -s (pwd)/.ctags $HOME/.ctags
-  end
-
-  if not test -f $HOME/.gitconfig
-    ln -s (pwd)/.gitconfig $HOME/.gitconfig
-  end
-
-  if not test -ff $HOME/.gitignore
-    ln -s  (pwd)/.gitignore $HOME/.tmux.conf
-  end
+  link_to_home .vimrc
+  link_to_home .tmux.cong
+  link_to_home .ctags
+  link_to_home .gitconfig
+  link_to_home .gitignore
 
   if not test -d $HOME/.ssh
     ssh-keygen
