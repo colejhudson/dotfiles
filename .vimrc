@@ -135,8 +135,8 @@ augroup END
 augroup sml
   autocmd! 
   autocmd FileType sml let sml_greek_tyvar_show_tick = 1
-	autocmd FileType sml nnoremap <leader>t :SMLTypeQuery<CR>
-	autocmd FileType sml nnoremap gd :SMLJumpToDef<CR>
+  autocmd FileType sml nnoremap <leader>t :SMLTypeQuery<CR>
+  autocmd FileType sml nnoremap gd :SMLJumpToDef<CR>
 augroup END
 
 augroup coq
