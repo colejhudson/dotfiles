@@ -36,6 +36,10 @@ if not test $USER_IS_CONFIGURED
   defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+  if not test -f $HOME/.vimrc
+    ln -s (pwd)/.vimrc $HOME/.vimrc
+  end
+
   if not test -f $HOME/.tmux.conf
     ln  -s (pwd)/.tmux.conf $HOME/.tmux.conf
   end
