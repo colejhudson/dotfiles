@@ -2,8 +2,8 @@
 
 alias c='clear'
 
-alias l='ls -a'
-alias ll='ls -la'
+alias l='ls -ha'
+alias ll='l -l'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -32,4 +32,4 @@ alias portof='lsof -i :'
 
 alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.com'
 
-alias datascience_notebook='docker run -d -p 8080:8888 -e $HOME=$PWD -e JUPYTER_ENABLE_LAB=yes -w $PWD -v $PWD:$PWD jupyter/datascience-notebook'
+
