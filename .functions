@@ -29,3 +29,9 @@ end
 function docker-stop-most-recent
   docker stop (docker-most-recently-started)
 end
+
+function brew-install-version -a formula version
+  set -l HASH (brew log --format=format:%H\ %s -F --grep=$version $formula | awk '{ print $1 }' | head -n 1)
+  set -l URL (brew info coq 2>&1 | grep '^From:' | cut -d ' ' -f 2 | sed 's/github/raw.githubusercontent/g' | sed "s/blob\/master/$HASH/g")
+  brew install $URL
+end
