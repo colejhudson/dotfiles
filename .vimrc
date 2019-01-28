@@ -4,8 +4,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -18,11 +16,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'majutsushi/tagbar'
-Plugin 'thinca/vim-quickrun'
 Plugin 'lervag/vimtex'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
-Plugin 'ujihisa/repl.vim'
 Plugin 'roman/golden-ratio'
 Plugin 'shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
@@ -38,12 +34,10 @@ Plugin 'the-lambda-church/coquille'
 Plugin 'let-def/vimbufsync' "Coquille dependency
 Plugin 'nightsense/snow' 
 Plugin 'jdsimcoe/abstract.vim'
-Plugin 'reasonml-editor/vim-reason-plus'
 Plugin 'ElmCast/elm-vim'
 Plugin 'junegunn/vader.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'qqwaszxxx/vim-battlestation'
 Plugin 'dag/vim-fish'
 Plugin 'kien/ctrlp.vim'
 
