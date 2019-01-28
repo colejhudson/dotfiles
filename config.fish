@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/usr/local/bin/fish
 
 set ROOT $HOME/.(whoami)
 set SRC $ROOT/src
