@@ -1,0 +1,11 @@
+#!/usr/local/bin/fish
+
+#: brew rollback [...options] formula version 
+
+set formula $argv[-2]
+set version $argv[-1]
+
+set HASH (brew log --format=format:%H\ %s -F --grep=$version $formula | awk '{ print $1 }' | head -n 1)
+set URL (brew info $formula 2>&1 | grep '^From:' | cut -d ' ' -f 2 | sed 's/github/raw.githubusercontent/g' | sed "s/blob\/master/$HASH/g")
+
+brew install $argv[1..-3] $URL
