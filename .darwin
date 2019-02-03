@@ -47,6 +47,7 @@ if not test $USER_IS_CONFIGURED
   link_to_home .ctags
   link_to_home .gitconfig
   link_to_home .gitignore
+  link_to_home .lldbinit
 
   if not test -d $HOME/.ssh
     ssh-keygen
