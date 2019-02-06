@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-set PS1 '𝝺 '
 set EDITOR 'nvim'
 set TERM 'xterm-256color'
 set COMPUTER_NAME 'laptop'
@@ -35,4 +34,6 @@ set PATH /usr/local/opt/go/libexec/bin $PATH
 set PATH /usr/local/opt/python/libexec/bin $PATH
 set PATH /usr/local/opt/node/bin $PATH
 set PATH /usr/local/opt/ruby/bin $PATH
+set PATH /Users/work/.deno/bin $PATH
 set PATH $HOME/.work/dotfiles/scripts/homebrew $PATH
+set PATH /Users/work/Library/Python/3.7/bin/ $PATH
