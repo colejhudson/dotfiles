@@ -15,11 +15,14 @@ end
 function datascience_notebook
   set DOCKER_PORT 8080
   set DOCKER_ID (docker run -d -p $DOCKER_PORT:8888 -e JUPYTER_ENABLE_LAB=yes -w $PWD -v $PWD:$PWD jupyter/datascience-notebook jupyter-lab $argv)
-  set DOCKER_PATH (docker logs $DOCKER_ID 2>&1 | grep "http" | head -n 1 | cut -d ')' -f 2 | cut -d '/' -f 2)
+  
+  while not docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2 | grep token
+    sleep 0.1
+  end
 
-  echo "http://127.0.0.1:$DOCKER_PORT/$DOCKER_PATH"
+  set URL_PARAMETERS (docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2)
 
-  open "http://127.0.0.1:$DOCKER_PORT/$DOCKER_PATH"
+  open "http://localhost:8080/?"$URL_PARAMETERS
 end
 
 function docker-most-recently-started
