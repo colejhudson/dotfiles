@@ -12,17 +12,66 @@ function gcc-run
   rm $file
 end
 
-function datascience_notebook
-  set DOCKER_PORT 8080
-  set DOCKER_ID (docker run -d -p $DOCKER_PORT:8888 -e JUPYTER_ENABLE_LAB=yes -w $PWD -v $PWD:$PWD jupyter/datascience-notebook jupyter-lab $argv)
+function nb-datascience
+  docker run \
+    -d \
+    --user root \
+    -w $PWD \
+    -v $PWD:$PWD \
+    -p 0:8888 \
+    -e GRANT_SUDO=yes \
+    -e JUPYTER_ENABLE_LAB=yes \
+    jupyter/datascience-notebook jupyter-lab \
+      --no-browser \
+      --ip-0.0.0.0 \
+      --port=8.8.8.8 \
+      --allow-root \
+      $argv
+end
+
+function nb-sagemath
+  docker run \
+    -d \
+    --user root \
+    -w $PWD \
+    -v $PWD:$PWD \
+    -p 0:8888 \
+    -e GRANT_SUDO=yes \
+    -e JUPYTER_ENABLE_LAB=yes \
+    --entrypoint='sage' \
+    sagemath/sagemath-jupyter \
+      -n jupyter \
+      --no-browser \
+      --ip=0.0.0.0 \
+      --port=8888 \
+      --allow-root \
+      $argv
+end
+
+function nb-arguments
+  set CMD $argv[1]
+  set --erase argv[1]
+
+  switch $CMD
+    case ds datasci datascience
+      nb-datascience $argv
+    case sm sage sagemath
+      nb-sagemath $argv
+  end
+end
+
+function nb
+  set DOCKER_ID (nb-arguments $argv)
   
-  while not docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2 | grep token
+  while not docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2 | grep token 2>&1 1>/dev/null
     sleep 0.1
   end
-
-  set URL_PARAMETERS (docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2)
-
-  open "http://localhost:8080/?"$URL_PARAMETERS
+  
+  printf "Done! Opening Jupyter Labs..."
+  
+  set PORT (docker container inspect $DOCKER_ID | jq '.[0]["NetworkSettings"]["Ports"]["8888/tcp"][0]["HostPort"]' | cut -d '"' -f 2) 
+  set PARAMS (docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2)
+  open "http://localhost:"$PORT"/?"$PARAMS
 end
 
 function docker-most-recently-started
