@@ -74,12 +74,13 @@ function nb
   open "http://localhost:"$PORT"/?"$PARAMS
 end
 
-function docker-most-recently-started
+function docker-most-recent
   docker ps | awk '{ print $1 }' | head -n 2 | tail -n 1
 end
 
 function docker-stop-most-recent
-  docker stop (docker-most-recently-started)
+  docker stop (docker-most-recent)
+end
 
 function google
   set QUERY (string join '+' (string split ' ' $argv))
