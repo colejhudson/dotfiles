@@ -29,6 +29,6 @@
   hub = !hub
   lab = !lab
   push-all = !git remote | xargs -L1 git push
-  inital-commit = commit -m "🎉initial commit!🎉"
+  hello-world = commit -S -m 'initial commit'
 [commit]
   gpgsign = true
