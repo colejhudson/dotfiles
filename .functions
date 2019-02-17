@@ -5,10 +5,10 @@ function update-gf -a MESSAGE
   curl --request POST --data $MESSAGE $URL
 end
 
-function gcc-run -a program
+function gcc-run
   set file (mktemp)
-  gcc $program -o $file
-  and eval $file
+  echo "gcc $argv -o $file"
+  gcc $argv -o $file; and eval $file
   rm $file
 end
 
