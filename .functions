@@ -80,4 +80,8 @@ end
 
 function docker-stop-most-recent
   docker stop (docker-most-recently-started)
+
+function google
+  set QUERY (string join '+' (string split ' ' $argv))
+  open "https://www.google.com/search?q=$QUERY"
 end
