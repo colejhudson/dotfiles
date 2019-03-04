@@ -5,6 +5,12 @@ function update-gf -a MESSAGE
   curl --request POST --data $MESSAGE $URL
 end
 
+function markdown-preview
+  set FILE (mktemp).html
+  pandoc -o $FILE $argv[1]
+  open $FILE
+end
+
 function gcc-run
   set file (mktemp)
   echo "gcc $argv -o $file"
