@@ -1,0 +1,47 @@
+#!/usr/bin/env fish
+
+function link_to_home -a file
+  if not test -f (pwd)/$file; and not test -f $HOME/$file
+    ln -s (dirname (status --current-filename))/$file $HOME/$file
+  end
+end
+
+if not test $USER_IS_CONFIGURED
+	link_to_home .vimrc
+	link_to_home .tmux.conf
+	link_to_home .ctags
+	link_to_home .gitconfig
+	link_to_home .gitignore
+	link_to_home .lldbinit
+
+  # neovim
+	ln -s (dirname (status --current-filename))/.vimrc $HOME/.config/nvim/init.vim
+
+	if not test $VUNDLE_IS_CONFIGURED
+		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+		vim +"so %" +"PluginInstall" +"qall" ~/.vimrc
+		set -U VUNDLE_IS_CONFIGURED true
+	end
+
+	set -U USER_IS_CONFIGURED true
+end
+
+if not test $SYSTEM_IS_CONFIGURED
+	set -U SYSTEM_IS_CONFIGURED true
+end
+
+function reset_configuration
+	rm ~/.vimrc
+	rm ~/.tmux.conf
+	rm ~/.ctags
+	rm ~/.gitconfig
+	rm ~/.gitignore
+	rm ~/.lldbinit
+
+	rm -rf ~/.vim/bundle/**
+
+	set -e CONFIGURED
+	set -e VUNDLE_IS_CONFIGURED
+	set -e SYSTEM_IS_CONFIGURED
+	set -e USER_IS_CONFIGURED
+end
