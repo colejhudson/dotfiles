@@ -7,15 +7,16 @@ function link_to_home -a file
 end
 
 if not test $USER_IS_CONFIGURED
-	link_to_home .vimrc
-	link_to_home .tmux.conf
-	link_to_home .ctags
-	link_to_home .gitconfig
-	link_to_home .gitignore
-	link_to_home .lldbinit
-
-  # neovim
-	ln -s (dirname (status --current-filename))/.vimrc $HOME/.config/nvim/init.vim
+  if not test $CONFIGS_ARE_CONFIGURED
+    link_to_home .vimrc
+    link_to_home .tmux.conf
+    link_to_home .ctags
+    link_to_home .gitconfig
+    link_to_home .gitignore
+    link_to_home .lldbinit
+    ln -s (dirname (status --current-filename))/.vimrc $HOME/.config/nvim/init.vim
+    set -U CONFIGS_ARE_CONFIGURED true
+  end
 
 	if not test $VUNDLE_IS_CONFIGURED
 		git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
