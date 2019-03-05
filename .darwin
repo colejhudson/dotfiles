@@ -1,8 +1,10 @@
 #!/usr/bin/env fish
 
-function link_to_home -a file
-  if test -f (pwd)/$file; and not test -f $HOME/$file
-    ln -s (pwd)/$file $HOME/$file
+function link_to -a path file
+  set filename (basename file)
+
+  if test -d $path; and test -f (realpath $file); and not test -f $path/$filename
+    ln -s (realpath $file) $path/$filename
   end
 end
 
@@ -42,12 +44,12 @@ if not test $USER_IS_CONFIGURED
   defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-  link_to_home .vimrc
-  link_to_home .tmux.cong
-  link_to_home .ctags
-  link_to_home .gitconfig
-  link_to_home .gitignore
-  link_to_home .lldbinit
+  link_to $HOME .vimrc
+  link_to $HOME .tmux.cong
+  link_to $HOME .ctags
+  link_to $HOME .gitconfig
+  link_to $HOME .gitignore
+  link_to $HOME .lldbinit
 
   if not test -d $HOME/.ssh
     ssh-keygen

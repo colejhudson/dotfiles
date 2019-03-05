@@ -5,6 +5,12 @@ function update-gf -a MESSAGE
   curl --request POST --data $MESSAGE $URL
 end
 
+function markdown-preview
+  set FILE (mktemp).html
+  pandoc -o $FILE $argv[1]
+  open $FILE
+end
+
 function gcc-run
   set file (mktemp)
   echo "gcc $argv -o $file"
@@ -23,8 +29,8 @@ function nb-datascience
     -e JUPYTER_ENABLE_LAB=yes \
     jupyter/datascience-notebook jupyter-lab \
       --no-browser \
-      --ip-0.0.0.0 \
-      --port=8.8.8.8 \
+      --ip=0.0.0.0 \
+      --port=8888 \
       --allow-root \
       $argv
 end
