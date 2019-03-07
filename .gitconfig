@@ -20,19 +20,22 @@
 [github]
   user = colejhudson
 [alias]
+  s = status
   c = commit
-  commit = commit -S
   b = branch
+  d = diff
   ap = add --patch
   ra = remote add
   rr = remote rename
   hub = !hub
   lab = !lab
+  commit = commit -S
   push-all = !git remote | xargs -L1 git push
   hello-world = commit -S -m 'initial commit'
   # nbdime config-git --enable --global
   # jupyter-nbdiff = !nbdiff
   # jupyter-mergetool = !nbdime
+  delete-whitespace = !sed --in-place 's/[[:space:]]\\+$//'
 [commit]
   gpgsign = true
 [filter "lfs"]

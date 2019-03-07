@@ -7,32 +7,22 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'metakirby5/codi.vim'
 Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plugin 'othree/html5.vim'
-Plugin 'rstacruz/sparkup'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'majutsushi/tagbar'
-Plugin 'lervag/vimtex'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
-Plugin 'roman/golden-ratio'
 Plugin 'shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 Plugin 'rizzatti/dash.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'jez/vim-better-sml'
 Plugin 'keith/swift.vim'
 Plugin 'jvoorhis/coq.vim'
-Plugin 'the-lambda-church/coquille'
-Plugin 'let-def/vimbufsync' "Coquille dependency
-Plugin 'nightsense/snow' 
 Plugin 'jdsimcoe/abstract.vim'
 Plugin 'ElmCast/elm-vim'
 Plugin 'junegunn/vader.vim'
@@ -42,7 +32,8 @@ Plugin 'dag/vim-fish'
 Plugin 'kien/ctrlp.vim'
 
 call vundle#end()            " required
-filetype plugin indent off    " required
+filetype plugin indent on   " required
+
 
 set columns=80
 
