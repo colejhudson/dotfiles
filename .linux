@@ -43,6 +43,10 @@ if not test $USER_IS_CONFIGURED
     set -U KEYBASE_IS_CONFIGURED true
   end
 
+  if not test $CRONTAB_IS_CONFIGURED
+    crontab $DOT/crontab
+  end
+
   set -U USER_IS_CONFIGURED true
 end
 
