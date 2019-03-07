@@ -34,4 +34,5 @@ alias portof='lsof -i :'
 
 alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.com'
 
+alias file_server="node -e \"require('http').createServer((rq,rs) => rs.end(require('fs').readFileSync(rq.url.slice(1))).listen(8072)\""
 
