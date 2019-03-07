@@ -8,6 +8,8 @@ alias ll='l -l'
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias coqtop='rlwrap coqtop'
+
 alias ghc='stack --resolver lts-12.0 --system-ghc ghc'
 alias ghci='stack --resolver lts-12.0 --system-ghc ghci'
 
