@@ -36,3 +36,6 @@ alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.c
 
 alias file_server="node -e \"require('http').createServer((rq,rs) => rs.end(require('fs').readFileSync(rq.url.slice(1))).listen(8072)\""
 
+alias list_xcode_simulators='find ~/Library/Developer/CoreSimulator/Devices/ -name "device.plist" -type f | xargs -L1 /usr/libexec/PlistBuddy -c "Print :name"<Paste>'
+
+alias list_running_simulator_devices='xcrun simctl list --json | grep -B 2 -A 5 Booted'
