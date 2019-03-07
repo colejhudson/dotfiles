@@ -44,6 +44,8 @@ Plugin 'kien/ctrlp.vim'
 call vundle#end()            " required
 filetype plugin indent off    " required
 
+set columns=80
+
 set showcmd
 set tabstop=2
 set expandtab
@@ -62,8 +64,8 @@ nmap <leader>so :source %<CR>
 nmap <leader>d :Dash<CR>
 nmap <C-o> i<Enter><Esc>k$l
 nmap <C-n> :NERDTreeToggle<CR>
-nnoremap <leader>. :CtrlPTag<CR>
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nmap <leader>. :CtrlPTag<CR>
+nmap <silent> <Leader>t :TagbarToggle<CR>
 
 vmap <leader>i <ESC><bar>i
 imap <leader>q <ESC> 
@@ -89,15 +91,15 @@ augroup END
 
 augroup rb
   autocmd!
-  autocmd FileType ruby set softtabstop = 2
-  autocmd FileType ruby set sw = 2
-  autocmd FileType ruby set ts = 2
+  autocmd FileType rb set softtabstop=2
+  autocmd FileType rb set sw=2
+  autocmd FileType rb set ts=2 
 augroup END
 
 augroup js
   autocmd!
-  autocmd FileType *.js let javascript_plugin_jsdoc = 1
-  autocmd FileType *.js let javascript_plugin_flow = 1
+  autocmd FileType js let javascript_plugin_jsdoc = 1
+  autocmd FileType js let javascript_plugin_flow = 1
 augroup END
 
 augroup jsx
@@ -113,17 +115,21 @@ augroup c
 augroup END
 
 augroup chz
-  autocmd BufNewFile,BufRead chz set syntax = scheme
+  autocmd BufNewFile,BufRead *.chz set syntax=scheme
+augroup END
+
+augroup arc
+  autocmd BufNewFile,BufRead *.arc set syntax=scheme
 augroup END
 
 augroup hs
   autocmd!
-  autocmd FileType haskell let haskell_indent_guard = 2
-  autocmd FileType haskell let haskell_indent_case = 2
-  autocmd FileType haskell let haskell_indent_do = 3 
-  autocmd FileType haskell set softtabstop = 2
-  autocmd FileType haskell set sw = 2
-  autocmd FileType haskell set ts = 2
+"  autocmd FileType haskell let haskell_indent_guard = 2
+"  autocmd FileType haskell let haskell_indent_case = 2
+"  autocmd FileType haskell let haskell_indent_do = 3
+"  autocmd FileType haskell set softtabstop = 2
+"  autocmd FileType haskell set sw = 2
+"  autocmd FileType haskell set ts = 2
 augroup END
 
 augroup sml
