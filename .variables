@@ -24,6 +24,7 @@ set NODEPATH $NODE_PATH $HOME/.npm
 
 set QUICKLISPPATH $HOME/.config/quicklisp
 
+set PATH /home/linuxbrew/.linuxbrew/bin $PATH
 set PATH $HOME/.yarn/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.local/bin $PATH
