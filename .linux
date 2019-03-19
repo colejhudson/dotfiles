@@ -4,7 +4,6 @@ function link_to_home -a file
   if not test -f (pwd)/$file; and not test -f $HOME/$file
     ln -s (dirname (status --current-filename))/$file $HOME/$file
 end
-end
 
 if not test $USER_IS_CONFIGURED
   if not test $CONFIGS_ARE_CONFIGURED
@@ -14,6 +13,8 @@ if not test $USER_IS_CONFIGURED
     link_to_home .gitconfig
     link_to_home .gitignore
     link_to_home .lldbinit
+    link_to_home .pypirc
+
     ln -s (dirname (status --current-filename))/.vimrc $HOME/.config/nvim/init.vim
     set -U CONFIGS_ARE_CONFIGURED true
   end

@@ -50,6 +50,7 @@ if not test $USER_IS_CONFIGURED
   link_to $HOME .gitconfig
   link_to $HOME .gitignore
   link_to $HOME .lldbinit
+  link_to $HOME .pypirc
 
   if not test -d $HOME/.ssh
     ssh-keygen
