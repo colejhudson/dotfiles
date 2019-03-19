@@ -24,6 +24,7 @@
   c = commit
   b = branch
   d = diff
+  l = log
   ap = add --patch
   ra = remote add
   rr = remote rename
