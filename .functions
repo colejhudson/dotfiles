@@ -18,6 +18,30 @@ function gcc-run
   rm $file
 end
 
+function nb-rocm-tensorflow
+  docker run \
+    -d \
+    -w $PWD \
+    -p 0:8888 \
+    --user root \
+    -v $PWD:$PWD \
+    --device=/dev/kfd \
+    --device=/dev/dri \
+    --group-add video \
+    -e GRANT_SUDO=yes \
+    --cap-add=SYS_PTRACE \
+    --entrypoint='jupyter' \
+    -e JUPYTER_ENABLE_LAB=yes \
+    --security-opt seccomp=unconfined \
+    rocm/tensorflow \
+      notebook \
+      --port=8888 \
+      --allow-root \
+      --no-browser \
+      --ip=0.0.0.0 \
+      $argv
+end
+
 function nb-datascience
   docker run \
     -d \
@@ -27,7 +51,8 @@ function nb-datascience
     -p 0:8888 \
     -e GRANT_SUDO=yes \
     -e JUPYTER_ENABLE_LAB=yes \
-    jupyter/datascience-notebook jupyter-lab \
+    jupyter/datascience-notebook \
+      jupyter lab \
       --no-browser \
       --ip=0.0.0.0 \
       --port=8888 \
@@ -63,6 +88,8 @@ function nb-arguments
       nb-datascience $argv
     case sm sage sagemath
       nb-sagemath $argv
+    case tf tensor tensorflow rocm-tensorflow rocm
+      nb-rocm-tensorflow $argv
   end
 end
 
