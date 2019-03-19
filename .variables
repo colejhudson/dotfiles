@@ -15,15 +15,6 @@ set LC_ALL 'en_US.UTF-8'
 
 set -x GPG_TTY (tty)
 
-set -x GOPATH (brew --prefix)/lib/go $GOPATH
-
-set NVM_DIR $HOME/.nvm
-set NODEPATH $NODE_PATH (brew --prefix)/lib/node_modules
-set NODEPATH $NODE_PATH $HOME/.config/yarn/global
-set NODEPATH $NODE_PATH $HOME/.npm
-
-set QUICKLISPPATH $HOME/.config/quicklisp
-
 set PATH /home/linuxbrew/.linuxbrew/bin $PATH
 set PATH $HOME/.yarn/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
@@ -38,3 +29,12 @@ set PATH /usr/local/opt/ruby/bin $PATH
 set PATH /Users/work/.deno/bin $PATH
 set PATH $HOME/.work/dotfiles/scripts/homebrew $PATH
 set PATH /Users/work/Library/Python/3.7/bin/ $PATH
+
+set -x GOPATH (brew --prefix)/lib/go $GOPATH
+
+set NVM_DIR $HOME/.nvm
+set NODEPATH $NODE_PATH (brew --prefix)/lib/node_modules
+set NODEPATH $NODE_PATH $HOME/.config/yarn/global
+set NODEPATH $NODE_PATH $HOME/.npm
+
+set QUICKLISPPATH $HOME/.config/quicklisp
