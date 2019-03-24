@@ -15,7 +15,14 @@ if not test $USER_IS_CONFIGURED
     link_to_home .lldbinit
     link_to_home .pypirc
 
-    ln -s (dirname (status --current-filename))/.vimrc $HOME/.config/nvim/init.vim
+    set -l CONFIG $HOME/.config
+    if not test -d $CONFIG
+      mkdir -p $CONFIG $CONFIG/pip $CONFIG/nvim
+
+      ln -s (dirname (status --current-filename))/.vimrc $CONFIG/nvim/init.vim
+      ln -s (dirname (status --current-filename))/pip.conf $CONFIG/pip/pip.conf
+    end
+
     set -U CONFIGS_ARE_CONFIGURED true
   end
 

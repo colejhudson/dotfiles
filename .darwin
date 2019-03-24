@@ -52,6 +52,16 @@ if not test $USER_IS_CONFIGURED
   link_to $HOME .lldbinit
   link_to $HOME .pypirc
 
+  set -l CONFIG $HOME/.config
+  if not test -d $CONFIG
+    mkdir -p $CONFIG $CONFIG/pip $CONFIG/nvim
+
+    link_to $CONFIG/pip pip.conf
+    link_to $CONFIG/nvim .vimrc
+
+    mv $CONFIG/nvim/.vimrc $CONFIG/nvim/init.vim
+  end
+
   if not test -d $HOME/.ssh
     ssh-keygen
     eval (ssh-agent -s)
