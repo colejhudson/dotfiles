@@ -8,32 +8,22 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'metakirby5/codi.vim'
-Plugin 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'majutsushi/tagbar'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
-Plugin 'shougo/deoplete.nvim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'keith/swift.vim'
-Plugin 'jvoorhis/coq.vim'
-Plugin 'jdsimcoe/abstract.vim'
-Plugin 'ElmCast/elm-vim'
-Plugin 'junegunn/vader.vim'
-Plugin 'junegunn/goyo.vim'
+" Syntax Highlighting
 Plugin 'leafgarland/typescript-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'jvoorhis/coq.vim'
+Plugin 'ElmCast/elm-vim'
+Plugin 'keith/swift.vim'
 Plugin 'dag/vim-fish'
-Plugin 'kien/ctrlp.vim'
+Plugin 'mxw/vim-jsx'
+
+" Utilities
+Plugin 'junegunn/vader.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 
 call vundle#end()            " required
 filetype plugin indent on   " required
-
 
 set columns=80
 
