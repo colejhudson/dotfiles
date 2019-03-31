@@ -44,12 +44,11 @@ nmap <leader>q :q<CR>
 nmap <leader>so :source %<CR>
 nmap <leader>d :Dash<CR>
 nmap <C-o> i<Enter><Esc>k$l
-nmap <C-n> :NERDTreeToggle<CR>
-nmap <leader>. :CtrlPTag<CR>
-nmap <silent> <Leader>t :TagbarToggle<CR>
+nmap jj <ESC>
 
 vmap <leader>i <ESC><bar>i
 imap <leader>q <ESC> 
+imap jj <ESC>
 imap <leader>v <ESC><bar>v
 imap <leader>wq <leader>q<bar>wq
 imap <leader>w <leader>q<bar>wi
