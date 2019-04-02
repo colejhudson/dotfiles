@@ -8,6 +8,8 @@ alias ll='l -l'
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias please='sudo'
+
 alias ghc='stack --resolver lts-12.0 --system-ghc ghc'
 alias ghci='stack --resolver lts-12.0 --system-ghc ghci'
 
@@ -18,18 +20,24 @@ alias e='emacsclient -nw'
 alias emacs_server_stop='e --eval "(kill-emacs)"'
 alias emacs_server_start='emacs -nw --daemon --eval "(server-start)"'
 
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias tf-ipython='docker run -it --network=host --device=/dev/kfd --device=/dev/dri --group-add video --cap-add=SYS_PTRACE rocm/tensorflow ipython'
 
-alias quicklisp='sbcl --load $QUICKLISPPATH/setup.lisp'
-alias quicklisp_run='quicklisp --quit --eval'
-alias commonlisp='quicklisp'
+if type -q 'sbcl'
+  alias quicklisp='sbcl --load $QUICKLISPPATH/setup.lisp'
+  alias quicklisp_run='quicklisp --quit --eval'
+  alias commonlisp='quicklisp'
+end
 
 alias f='fzf'
-
-alias please='sudo'
 
 alias portof='lsof -i :'
 
 alias cole@colejhudson.com='curl --data-binary @- curlmail.co/cole@colejhudson.com'
 
+if test (uname -s) = Darwin
+  alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+end
 
+if test (uname -s) = Linux
+  alias open='xdg-open'
+end
