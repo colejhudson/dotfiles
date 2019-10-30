@@ -1,24 +1,6 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-function update-gf -a MESSAGE
-  set URL https://whatthefuckisyourboyfrienddoing.now.sh/
-  curl --request POST --data $MESSAGE $URL
-end
-
-function markdown-preview
-  set FILE (mktemp).html
-  pandoc -o $FILE $argv[1]
-  open $FILE
-end
-
-function gcc-run
-  set file (mktemp)
-  echo "gcc $argv -o $file"
-  gcc $argv -o $file; and eval $file
-  rm $file
-end
-
-function nb-datascience
+function nb-datascience() {
   docker run \
     -d \
     --user root \
@@ -33,9 +15,9 @@ function nb-datascience
       --port=8888 \
       --allow-root \
       $argv
-end
+}
 
-function nb-sagemath
+function nb-sagemath() {
   docker run \
     -d \
     --user root \
@@ -52,43 +34,37 @@ function nb-sagemath
       --port=8888 \
       --allow-root \
       $argv
-end
+}
 
-function nb-arguments
-  set CMD $argv[1]
-  set --erase argv[1]
+function nb-arguments() {
+  local CMD=$@[0]
+  unset $@[0]
 
-  switch $CMD
-    case ds datasci datascience
-      nb-datascience $argv
-    case sm sage sagemath
-      nb-sagemath $argv
-  end
-end
+  case $CMD in
+    ds|datasci|datascience) nb-datascience $@ ;;  
+    sm|sage|sagemath) nb-sagemath $@ ;;
+  esac
+}
 
-function nb
-  set DOCKER_ID (nb-arguments $argv)
+function nb() {
+  local DOCKER_ID=$(nb-arguments $argv)
   
-  while not docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2 | grep token 2>&1 1>/dev/null
+  while [[ ! $(docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2 | grep token 2>&1 1>/dev/null) ]]; do
     sleep 0.1
-  end
+  done
   
   printf "Done! Opening Jupyter Labs..."
   
-  set PORT (docker container inspect $DOCKER_ID | jq '.[0]["NetworkSettings"]["Ports"]["8888/tcp"][0]["HostPort"]' | cut -d '"' -f 2) 
-  set PARAMS (docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2)
+  local PORT=$(docker container inspect $DOCKER_ID | jq '.[0]["NetworkSettings"]["Ports"]["8888/tcp"][0]["HostPort"]' | cut -d '"' -f 2) 
+  local PARAMS=$(docker logs $DOCKER_ID 2>&1 | grep http | head -n 1 | cut -d '?' -f 2)
+
   open "http://localhost:"$PORT"/?"$PARAMS
-end
+}
 
-function docker-most-recent
+function docker-most-recent() {
   docker ps | awk '{ print $1 }' | head -n 2 | tail -n 1
-end
+}
 
-function docker-stop-most-recent
-  docker stop (docker-most-recent)
-end
-
-function google
-  set QUERY (string join '+' (string split ' ' $argv))
-  open "https://www.google.com/search?q=$QUERY"
-end
+function docker-stop-most-recent() {
+  docker stop $(docker-most-recent)
+}

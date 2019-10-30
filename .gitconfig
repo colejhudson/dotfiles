@@ -1,58 +1,51 @@
 [user]
-  email = cole@colejhudson.com
-  name = Cole Hudson
-  username = colejhudson
-  signingkey = "49667D13599D4AF837EA646E2F7DB0FBBB9FEFC7" 
+email = cole@colejhudson.com
+name = Cole Hudson
+username = colejhudson
+signingkey = "49667D13599D4AF837EA646E2F7DB0FBBB9FEFC7" 
+
 [core]
-  editor = vim
-  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  excludesfile = ~/.gitignore
+editor = vim
+whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+excludesfile = ~/.gitignore
+
 [web]
-  browser = firefox
+browser = firefox
+
 [credential]
-  helper = cache --timeout 7200
+helper = cache --timeout 7200
+
 [transfer]
-  fsckObjects = false
+fsckObjects = false
+
 [fetch]
-  fsckobjects = false
+fsckobjects = false
+
 [receive "fsck"]
-  zeroPaddedFilemode = warn
+zeroPaddedFilemode = warn
+
 [github]
-  user = colejhudson
+user = colejhudson
+
 [alias]
-  s = status
-  c = commit
-  b = branch
-  d = diff
-  ap = add --patch
-  ra = remote add
-  rr = remote rename
-  hub = !hub
-  lab = !lab
-  commit = commit -S
-  push-all = !git remote | xargs -L1 git push
-  hello-world = commit -S -m 'initial commit'
-  # nbdime config-git --enable --global
-  # jupyter-nbdiff = !nbdiff
-  # jupyter-mergetool = !nbdime
-  delete-whitespace = !sed --in-place 's/[[:space:]]\\+$//'
+s = status
+c = commit
+b = branch
+d = diff
+ap = add --patch
+ra = remote add
+rr = remote rename
+hub = !hub
+commit = commit -S
+create = commit -S -m 'initial commit'
+trim = !sed --in-place 's/[[:space:]]\\+$//'
+push-all = !git remote | xargs -L1 git push
+
 [commit]
-  gpgsign = true
+gpgsign = true
+
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-[diff "jupyternotebook"]
-	command = git-nbdiffdriver diff
-[merge "jupyternotebook"]
-	driver = git-nbmergedriver merge %O %A %B %L %P
-	name = jupyter notebook merge driver
-[difftool "nbdime"]
-	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
-[difftool]
-	prompt = false
-[mergetool "nbdime"]
-	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-[mergetool]
-	prompt = false
+process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f

@@ -1,2 +1,0 @@
-0 8,14 * * * $HOME/.$USER/dotfiles/scripts/cron/post-ip.sh
-1 8,14 * * * $HOME/.$USER/dotfiles/scripts/cron/get-ip.sh
