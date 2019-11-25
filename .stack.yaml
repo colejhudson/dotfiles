@@ -1,0 +1,8 @@
+system-ghc: true
+
+templates:
+  params:
+    author-email: cole@colejhudson.com
+    author-name: Cole Hudson
+    copyright: Cole Hudson
+    github-username: colejhudson
