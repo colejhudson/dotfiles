@@ -1,0 +1,32 @@
+servers = (
+  {
+    address = "irc.freenode.net";
+    port = "6697";
+    chatnet = "freenode";
+    use_ssl = "yes";
+    ssl_verify = "yes";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  Freenode = {
+    type = "IRC";
+    autosendcmd = "/msg nickserv identify colejhudson $IRC_NICK_PASSWORD";
+  };
+};
+
+channels = (
+    { name = "#nickserv"; autojoin = "yes"; },
+    { name = "#chanserv"; autojoin = "yes"; },
+    { name = "#colejhudson"; chatnet = "Freenode"; autojoin = "Yes"; }
+);
+
+settings = {
+  core = {
+    real_name = "Cole Hudson";
+    user_name = "colejhudson";
+    nick = "colejhudson";
+  };
+  "fe-text" = { actlist_sort = "refnum"; };
+};
