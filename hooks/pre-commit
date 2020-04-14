@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+die() {
+  echo "error: $1"
+  echo "Look pal, something went awfully wrong and I'm gonna have to cancel this commit!"
+  exit 1
+}
+
+relative_root=$(git rev-parse --show-cdup)
+staged=$(git diff --cached --name-only)
+for path in $staged; do
+  file=${relative_root:-.}$path
+
+  case $(file -i $file) in
+      text/x-shellscript) 
+          # h/t https://stackoverflow.com/a/171932/8738498
+          bash -n $file || die "bash threw an error while validating $file"
+      ;;
+  esac
+
+  case $(basename file) in
+    *.plist)
+      case $(uname) in
+        Darwin) plutil $file || die "plutil threw an error whlile validating $file";;
+        *) 
+          # fixme: Use an XML validator? 
+          die "Buddy, I have no idea how to verify plists on operating systems other than macOS."
+        ;;
+      esac
+    ;;
+
+    *.service)
+      case $(uname) in
+        Linux) systemd-analyze verify $file ;;
+        *) die "Unable to verify systemd service files on operating systems other than Linux."
+      esac
+    ;;
+  esac
+done
+
+echo "All quiet on the western front."
