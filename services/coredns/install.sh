@@ -24,15 +24,18 @@ systemctl daemon-reload
 systemctl stop coredns
 systemctl start coredns
 
-current_ip=$(ip route get 1 | head -n 1 | awk '{ print $7 }')
-router_ip=$(ip route get 1 | head -n 1 | awk '{ print $3 }')
+route=$(ip route get 8.8.8.8 | head -n 1)
+device=$(echo $route | awk '{ print $5 }')
+current_mac=$(cat /sys/class/net/$device/address)
+current_ip=$(echo $route | awk '{ print $7 }')
+router_ip=$(echo $route | awk '{ print $3 }')
 
 echo ""
 echo "🎉 Sucesss!"
 echo ""
 echo "To use this server from another computer:"
 echo "  1) Make sure you update your router's settings to statically bind $current_ip"
-echo "     to this computer's MAC address (you can probably do that at http://$router_ip)"
+echo "     to your MAC address ($current_mac) (you can probably do that at http://$router_ip)"
 echo "  2) Add 'nameserver $current_ip' to /etc/resolv.conf'"
 echo ""
 echo "Et voila! Have fun!"
