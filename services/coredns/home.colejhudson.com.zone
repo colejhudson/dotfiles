@@ -1,2 +1,11 @@
-home.colejhudson.com.   IN  SOA   bill.ns.cloudflare.com. dns.home.colejhudson.com. 2015082541 7200 3600 1209600 3600
-home.colejhudson.com.   IN  A     192.168.0.3
+home.colejhudson.com.         IN  SOA (
+                                  bill.ns.cloudflare.com.
+                                  dns.home.colejhudson.com.
+                                  2015082541
+                                  7200
+                                  3600
+                                  1209600
+                                  3600
+                              )
+home.colejhudson.com.         IN  A     192.168.0.3
+haproxy.home.colejhudson.com. IN  CNAME home.colejhudson.com.
