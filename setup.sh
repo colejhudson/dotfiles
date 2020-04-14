@@ -57,14 +57,14 @@ case $(uname) in
     sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
     sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
-    sudo defaults write com.apple.terminal StringEncodings -array 4  
+    sudo defaults write com.apple.terminal StringEncodings -array 4
     sudo defaults write com.apple.terminal SecureKeyboardEntry -bool true
 
     if [[ !(-d /Applications/Xcode.app) ]]; then
       xcode-select --install
       set MACOS_SDKS /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
       sudo ln -s $MACOS_SDKS/MacOSX.sdk/usr/include /usr/include;
-    fi 
+    fi
   ;;
 esac
 

@@ -17,15 +17,16 @@ if [[ -e $HOME/.rvm ]]; then
   export PATH="$PATH:$HOME/.rvm/bin"
 fi
 
+export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/.local/bin
 
 export GPG_TTY=$(tty)
 
+alias ..='cd ..'
+alias ...='cd ../..'
 alias c='clear'
 alias l='ls -ha'
 alias ll='l -l'
-alias ..='cd ..'
-alias ...='cd ../..'
 alias v='vim'
 alias please='sudo'
-alias portof='lsof -i :'
+alias crispr='vi ~/.bashrc && source ~/.bashrc'
