@@ -5,7 +5,7 @@ DOTFILES=$(dirname $0)
 DOTFILES=$(cd $DOTFILES && pwd)
 
 for dotfile in $(ls -A | grep -e '^\.'); do
-  ln -sf $dotfile $HOME/$(basename $dotfile)
+  ln -sf $DOTFILES/$dotfile $HOME/$dotfile
 done
 
 case $(uname) in
