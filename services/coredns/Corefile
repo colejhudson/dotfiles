@@ -5,6 +5,7 @@ home.colejhudson.com:53 {
 }
 
 .:53 {
+  reload 10s
   forward . /etc/resolv.conf
   log
   errors
