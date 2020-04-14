@@ -1,13 +1,4 @@
 set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'elixir-editors/vim-elixir'
-
-call vundle#end()
 filetype plugin indent on
 
 syntax on
@@ -30,11 +21,3 @@ set noswapfile
 
 set hlsearch
 set incsearch
-
-let mapleader = ","
-let g:mapleader = ","
-
-vmap <leader>w :w<cr>
-
-imap <leader>w <esc>:w<cr>i
-imap <leader>q <esc>

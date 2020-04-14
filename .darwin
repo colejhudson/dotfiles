@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-function link_to() {
-  local path=$1
-  local file=$2
-  local filename=$(basename $file)
-
-  if [[ -d $path && -f $(realpath $file) && !(-f $path/$filename) ]]; then
-    ln -s $(realpath $file) $path/$filename;
-  fi
-}
-
 chflags nohidden ~/Library
 
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
@@ -43,9 +33,9 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-sudo scutil --set HostName $COMPUTER_NAME
-sudo scutil --set ComputerName $COMPUTER_NAME
-sudo scutil --set LocalHostName $COMPUTER_NAME
+sudo scutil --set HostName 'colejhudson.com'
+sudo scutil --set ComputerName 'colejhudson'
+sudo scutil --set LocalHostName 'colejhudson'
 
 sudo nvram SystemAudioVolume=''
 
@@ -60,8 +50,6 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 sudo defaults write com.apple.terminal StringEncodings -array 4  
 sudo defaults write com.apple.terminal SecureKeyboardEntry -bool true
 
-if [[ !(-d /Applications/Xcode.app) ]]; then
-	xcode-select --install
-	set MACOS_SDKS /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
-	sudo ln -s $MACOS_SDKS/MacOSX.sdk/usr/include /usr/include;
-fi 
+xcode-select --install
+local MACOS_SDKS='/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs'
+sudo ln -s ${MACOS_SDKS}/MacOSX.sdk/usr/include /usr/include;
