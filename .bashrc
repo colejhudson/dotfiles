@@ -20,6 +20,8 @@ fi
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/.local/bin
 
+export GOROOT=/usr/local/go
+
 export GPG_TTY=$(tty)
 
 alias ..='cd ..'
