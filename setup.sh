@@ -67,3 +67,7 @@ case $(uname) in
     fi 
   ;;
 esac
+
+for service in services/*; do
+  $service/install.sh
+done

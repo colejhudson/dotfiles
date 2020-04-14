@@ -1,0 +1,11 @@
+home.colejhudson.com:53 {
+  file ./home.colejhudson.com.zone
+  log
+  errors
+}
+
+.:53 {
+  forward . /etc/resolv.conf
+  log
+  errors
+}

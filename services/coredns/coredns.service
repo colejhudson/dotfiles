@@ -1,0 +1,26 @@
+[Unit]
+Description=coredns
+Requires=network.target docker.service
+After=network.target docker.service
+
+[Service]
+User=coredns
+Group=coredns
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+WorkingDirectory=/var/run/coredns
+ExecStop=/usr/bin/docker stop coredns
+ExecStart=/usr/bin/docker run \
+                      --rm \
+                      --name=coredns \
+                      -p 53:53 \
+                      -p 53:53/udp \
+                      -v /var/log:/var/log \
+                      -v /var/run/coredns:/var/run/coredns \
+                      -w /var/run/coredns \
+                      coredns/coredns:latest \
+                        -conf /var/run/coredns/Corefile
+
+[Install]
+WantedBy=multi-user.target
