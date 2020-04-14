@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+# h/t https://stackoverflow.com/a/630387/8738498
+DOTFILES=$(dirname $0)
+DOTFILES=$(cd $DOTFILES && pwd)
+
+for dotfile in $(ls -A | grep -e '^\.'); do
+  ln -sf $dotfile $HOME/$(basename $dotfile)
+done
+
 case $(uname) in
   Darwin)
     chflags nohidden ~/Library
