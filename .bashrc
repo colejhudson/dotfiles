@@ -12,6 +12,13 @@ export LC_NUMERIC='en_US.UTF-8'
 export LC_TIME='en_US.UTF-8'
 export LC_ALL='en_US.UTF-8'
 
+if [[ -e $HOME/.rvm ]]; then
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+  export PATH="$PATH:$HOME/.rvm/bin"
+fi
+
+export PATH=$PATH:~/.local/bin
+
 export GPG_TTY=$(tty)
 
 alias c='clear'
