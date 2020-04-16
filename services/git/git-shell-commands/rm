@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eou pipefail
+
 function die {
   echo "error: $@"
   echo "usage: $(basename $0) [name]"
@@ -8,7 +10,7 @@ function die {
 
 [[ -z $@ ]] && die 'no name given'
 
-$name=$(echo $@ | tr [[:upper:]] [[:lower:]] | tr '\/| ' '-' | sed 's/[^[:alpha:]-]//g').git
+name=$(echo $@ | tr [[:upper:]] [[:lower:]] | tr '\/| ' '-' | sed 's/[^[:alpha:]-]//g').git
 rm -r ~/$name
 
 echo "succesfully deleted $name"
