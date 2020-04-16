@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+repos=$(ls -d *.git 2>/dev/null)
+if [[ -z $repos ]]; then
+  echo "You haven't created any repositories yet"
+else
+  echo $repos
+fi
