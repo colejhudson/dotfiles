@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function die {
+  echo "error: $@"
+  echo "usage: $(basename $0) [name]"
+  exit 1
+}
+
+[[ -z $@ ]] && die 'no name given'
+
+$name=$(echo $@ | tr [[:upper:]] [[:lower:]] | tr '\/| ' '-' | sed 's/[^[:alpha:]-]//g').git
+rm -r ~/$name
+
+echo "succesfully deleted $name"

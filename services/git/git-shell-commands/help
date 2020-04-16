@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo 'add [name]     create a git repository'
+echo 'rm [name]      delete a git repository'

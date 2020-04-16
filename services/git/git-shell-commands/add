@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+function die {
+  echo "error: $@"
+  echo "usage: $(basename $0) [name]"
+  exit 1
+}
+
+[[ -z $@ ]] && die 'no name given'
+
+name=$(echo $@ | tr [[:upper:]] [[:lower:]] | tr '\/| ' '-' | sed 's/[^[:alpha:]-]//g').git
+
+read -p "creating new repo '$name', is this ok? (y/n): " response
+case $response in
+  [Yy])
+    if [[ -d $name ]]; then
+      die "$name already exists"
+    fi
+
+    mkdir ~/$name || die "unable to create $name"
+   ;;
+  *) die "user said no" ;;
+esac
+
+git init --bare ~/$name || die "git was unable to initialize $name"
+
+echo "successfully created $name, hooray!"
