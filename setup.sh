@@ -43,10 +43,6 @@ case $(uname) in
     defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-    sudo scutil --set HostName $COMPUTER_NAME
-    sudo scutil --set ComputerName $COMPUTER_NAME
-    sudo scutil --set LocalHostName $COMPUTER_NAME
-
     sudo nvram SystemAudioVolume=''
 
     sudo systemsetup -setrestartfreeze on
@@ -55,7 +51,6 @@ case $(uname) in
     sudo defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
     sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-    sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 
     sudo defaults write com.apple.terminal StringEncodings -array 4
     sudo defaults write com.apple.terminal SecureKeyboardEntry -bool true
