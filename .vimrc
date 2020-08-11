@@ -21,3 +21,5 @@ set noswapfile
 
 set hlsearch
 set incsearch
+
+set exrc
