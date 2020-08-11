@@ -2,13 +2,13 @@
 
 die() {
   echo "error: $1"
-  echo "Look pal, something went awfully wrong and I'm gonna have to cancel this commit!"
+  echo "Look pal, something went awfully wrong and I'm gonna have to cancel this commit."
   exit 1
 }
 
 relative_root=$(git rev-parse --show-cdup)
-staged=$(git diff --cached --name-only)
-for path in $staged; do
+staged_files=$(git diff --cached --name-only)
+for path in $staged_files; do
   file=${relative_root:-.}$path
 
   case $(file -i $file) in
@@ -24,7 +24,7 @@ for path in $staged; do
         Darwin) plutil $file || die "plutil threw an error whlile validating $file";;
         *) 
           # fixme: Use an XML validator? 
-          die "Buddy, I have no idea how to verify plists on operating systems other than macOS."
+          die "tbh i have no idea how to validate XML on $(uname)."
         ;;
       esac
     ;;
@@ -32,10 +32,10 @@ for path in $staged; do
     *.service)
       case $(uname) in
         Linux) systemd-analyze verify $file ;;
-        *) die "Unable to verify systemd service files on operating systems other than Linux."
+        *) die "I'm not going to validate $file because this system isn't Linux-based."
       esac
     ;;
   esac
 done
 
-echo "All quiet on the western front."
+echo "Steady as she goes cap'n."
