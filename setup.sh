@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 # h/t https://stackoverflow.com/a/630387/8738498
-DOTFILES=$(dirname $0)
-DOTFILES=$(cd $DOTFILES && pwd)
+here=$(dirname $0)
+here=$(cd $dotfiles && pwd)
 
 for dotfile in $(ls -A | grep -e '^\.'); do
-  ln -sf $DOTFILES/$dotfile $HOME/$dotfile
+  ln -sf $here/$dotfile $HOME/$dotfile
 done
 
 case $(uname) in
