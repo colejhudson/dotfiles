@@ -66,8 +66,9 @@ case $(uname) in
       sudo ln -s $MACOS_SDKS/MacOSX.sdk/usr/include /usr/include;
     fi
   ;;
+  Linux)
+    for service in services/*; do
+      $service/install.sh
+    done
+  ;;
 esac
-
-for service in services/*; do
-  $service/install.sh
-done
