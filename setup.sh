@@ -67,7 +67,7 @@ case $(uname) in
     fi
   ;;
   Linux)
-    for service in services/*; do
+    for service in systemd/*; do
       $service/install.sh
     done
   ;;
