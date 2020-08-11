@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # h/t https://stackoverflow.com/a/630387/8738498
 here=$(dirname $0)
-here=$(cd $dotfiles && pwd)
+here=$(cd $here && pwd)
 
 for dotfile in $(ls -A | grep -e '^\.'); do
   ln -sf $here/$dotfile $HOME/$dotfile
@@ -43,6 +43,19 @@ case $(uname) in
     defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
     defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
+    # fixme: While this successfully updates the relevant preference file, the
+    # change is not reflected in the user's language preferences. Nor, does it
+    # change the behavior of the keyboard. So, something about this is insufficient
+    # or wrong.
+    defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
+      '{ "Bundle ID" = "com.apple.inputmethod.Korean";
+         "Input Mode" = "com.apple.inputmethod.Korean.2SetKorean";
+         InputSourceKind = "Input Mode"; }'
+
+    defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add \
+      '{ "Bundle ID" = "com.apple.inputmethod.Korean";
+         InputSourceKind = "Keyboard Input Method"; }'
+
     sudo nvram SystemAudioVolume=''
 
     sudo systemsetup -setrestartfreeze on
@@ -57,7 +70,7 @@ case $(uname) in
 
     if [[ !(-d /Applications/Xcode.app) ]]; then
       xcode-select --install
-      set MACOS_SDKS /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+      MACOS_SDKS=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
       sudo ln -s $MACOS_SDKS/MacOSX.sdk/usr/include /usr/include;
     fi
   ;;
