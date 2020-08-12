@@ -29,6 +29,12 @@ case $(uname) in
     defaults write com.apple.finder FXDefaultSearchScope -string 'SCcf'
     defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
+    # h/t https://gist.github.com/ddunbar/0a606e9036aaea552ec9cb21548bc618
+    defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
+    defaults write com.apple.dt.Xcode IDEBuildOperationTimingLogLevel -int 3
+    defaults write com.apple.dt.Xcode IDEBuildOperationDependenciesLogLevel -int 3
+    defaults write com.apple.dt.Xcode IDEShowPrebuildLogs -bool YES
+
     defaults write NSGlobalDomain AppleShowAllExtensions -bool true
     defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
     defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
