@@ -10,3 +10,12 @@ node_modules
 
 # c
 build
+
+# {pdf,lua}latex
+*.aux
+*.pdf
+*.log
+*.out
+
+# excel
+~$*
